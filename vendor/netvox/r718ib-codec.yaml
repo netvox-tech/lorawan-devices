@@ -1,5 +1,5 @@
 uplinkDecoder:
-  fileName: payload/r718ia_r718ib_r730ia_r730ib.js
+  fileName: payload/r718ib.js
   examples:
     - description: Startup version report
       input:
@@ -46,7 +46,7 @@ uplinkDecoder:
           ADCRawChange: 10
 
 downlinkDecoder:
-  fileName: payload/r718ia_r718ib_r730ia_r730ib.js
+  fileName: payload/r718ib.js
   examples:
     - description: Configure report request
       input:
@@ -71,7 +71,7 @@ downlinkDecoder:
           Device: 'R718IB'
 
 downlinkEncoder:
-  fileName: payload/r718ia_r718ib_r730ia_r730ib.js
+  fileName: payload/r718ib.js
   examples:
     - description: Configure report request
       input:

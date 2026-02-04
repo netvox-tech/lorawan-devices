@@ -1,5 +1,5 @@
 name: R718IB - Wireless 0-10V ADC Sampling Interface
-description: The device is designed for a variety of resistive bridge-sensing applications like pressure, temperature, and level-sensing applications. It can also support other applications, weight scale and force-sensing applications that use strain gauge load cells, and other general resistive bridge signal-conditioning applications.
+description: This device can be connected with ADC sampling interface device. The black wire is the ground wire and red one is the ADC sampling interface wire. The ADC sampling interface voltage range is 0-10V, which adopts SX1276 wireless communication module.
 
 hardwareVersions:
   - version: '1'
