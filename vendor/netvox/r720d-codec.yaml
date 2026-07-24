@@ -1,0 +1,103 @@
+uplinkDecoder:
+  fileName: payload/r720d.js
+  examples:
+    - description: Startup version report
+      input:
+        fPort: 6
+        bytes: [0x01, 0x9D, 0x00, 0x64, 0x15, 0x20, 0x20, 0x08, 0x11, 0x00, 0x00]
+      output:
+        data:
+          Device: 'R720D'
+          Version: 1
+          DeviceType: 157
+          ReportType: 0
+          SoftwareVersion: 10
+          HardwareVersion: 21
+          Datecode: '20200811'
+
+    - description: Status report
+      input:
+        fPort: 6
+        bytes: [0x01, 0x9D, 0x01, 0x24, 0x09, 0xC5, 0x19, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Device: 'R720D'
+          Version: 1
+          DeviceType: 157
+          ReportType: 1
+          Battery: 3.6
+          Temperature_2Bytes_0_01: 25.01
+          ThresholdAlarmTemperature: 25
+
+    - description: Configure report response
+      input:
+        fPort: 7
+        bytes: [0x81, 0x9D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'ConfigReportRsp'
+          Device: 'R720D'
+          Status: 'Success'
+
+    - description: Read configure report response
+      input:
+        fPort: 7
+        bytes: [0x82, 0x9D, 0x03, 0x84, 0x07, 0x08, 0x01, 0x00, 0x32, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'ReadConfigReportRsp'
+          Device: 'R720D'
+          MinTime: 900
+          MaxTime: 1800
+          BatteryChange: 0.1
+          TemperatureChange_2Bytes_0_01: 0.5
+
+downlinkDecoder:
+  fileName: payload/r720d.js
+  examples:
+    - description: Configure report request
+      input:
+        fPort: 7
+        bytes: [0x01, 0x9D, 0x03, 0x84, 0x07, 0x08, 0x01, 0x00, 0x32, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'ConfigReportReq'
+          Device: 'R720D'
+          MinTime: 900
+          MaxTime: 1800
+          BatteryChange: 0.1
+          TemperatureChange_2Bytes_0_01: 0.5
+
+    - description: Read configure report request
+      input:
+        fPort: 7
+        bytes: [0x02, 0x9D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'ReadConfigReportReq'
+          Device: 'R720D'
+
+downlinkEncoder:
+  fileName: payload/r720d.js
+  examples:
+    - description: Configure report request
+      input:
+        data:
+          Cmd: 'ConfigReportReq'
+          Device: 'R720D'
+          MinTime: 900
+          MaxTime: 1800
+          BatteryChange: 0.1
+          TemperatureChange_2Bytes_0_01: 0.5
+      output:
+        fPort: 7
+        bytes: [0x01, 0x9D, 0x03, 0x84, 0x07, 0x08, 0x01, 0x00, 0x32, 0x00, 0x00]
+
+    - description: Read configure report request
+      input:
+        data:
+          Cmd: 'ReadConfigReportReq'
+          Device: 'R720D'
+      output:
+        fPort: 7
+        bytes: [0x02, 0x9D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]

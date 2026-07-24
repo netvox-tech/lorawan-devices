@@ -1,0 +1,151 @@
+﻿uplinkDecoder:
+  fileName: payload/r718we.js
+  examples:
+    - description: Startup version report
+      input:
+        fPort: 6
+        bytes: [0x01, 0x8F, 0x00, 0x64, 0x01, 0x20, 0x20, 0x07, 0x29, 0x00, 0x00]
+      output:
+        data:
+          Device: 'R718WE'
+          SWver: 10
+          HWver: 1
+          Datecode: '20200729'
+
+    - description: Status report
+      input:
+        fPort: 6
+        bytes: [0x01, 0x8F, 0x01, 0x32, 0x00, 0x1E, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Device: 'R718WE'
+          Volt: 3.2
+          WaterLeakLocation: 30
+
+    - description: Configure report response
+      input:
+        fPort: 7
+        bytes: [0x81, 0x8F, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'ConfigReportRsp'
+          Device: 'R718WE'
+          Status: 'Success'
+
+    - description: Read configure report response
+      input:
+        fPort: 7
+        bytes: [0x82, 0x8F, 0x03, 0x84, 0x07, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'ReadConfigReportRsp'
+          Device: 'R718WE'
+          MinTime: 900
+          MaxTime: 1800
+
+    - description: Set sensor parameter response
+      input:
+        fPort: 7
+        bytes: [0x83, 0x8F, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'SetSensorParaRsp'
+          Device: 'R718WE'
+          Status: 'Success'
+
+    - description: Get sensor parameter response
+      input:
+        fPort: 7
+        bytes: [0x84, 0x8F, 0x03, 0xE8, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'GetSensorParaRsp'
+          Device: 'R718WE'
+          LineLength: 1000
+          Sensitivity: 2
+
+downlinkDecoder:
+  fileName: payload/r718we.js
+  examples:
+    - description: Configure report request
+      input:
+        fPort: 7
+        bytes: [0x01, 0x8F, 0x03, 0x84, 0x07, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'ConfigReportReq'
+          Device: 'R718WE'
+          MinTime: 900
+          MaxTime: 1800
+
+    - description: Read configure report request
+      input:
+        fPort: 7
+        bytes: [0x02, 0x8F, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'ReadConfigReportReq'
+          Device: 'R718WE'
+
+    - description: Set sensor parameter request
+      input:
+        fPort: 7
+        bytes: [0x03, 0x8F, 0x03, 0xE8, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'SetSensorParaReq'
+          Device: 'R718WE'
+          LineLength: 1000
+          Sensitivity: 2
+
+    - description: Get sensor parameter request
+      input:
+        fPort: 7
+        bytes: [0x04, 0x8F, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'GetSensorParaReq'
+          Device: 'R718WE'
+
+downlinkEncoder:
+  fileName: payload/r718we.js
+  examples:
+    - description: Configure report request
+      input:
+        data:
+          Cmd: 'ConfigReportReq'
+          Device: 'R718WE'
+          MinTime: 900
+          MaxTime: 1800
+      output:
+        fPort: 7
+        bytes: [0x01, 0x8F, 0x03, 0x84, 0x07, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00]
+
+    - description: Read configure report request
+      input:
+        data:
+          Cmd: 'ReadConfigReportReq'
+          Device: 'R718WE'
+      output:
+        fPort: 7
+        bytes: [0x02, 0x8F, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+
+    - description: Set sensor parameter request
+      input:
+        data:
+          Cmd: 'SetSensorParaReq'
+          Device: 'R718WE'
+          LineLength: 1000
+          Sensitivity: 2
+      output:
+        fPort: 7
+        bytes: [0x03, 0x8F, 0x03, 0xE8, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+
+    - description: Get sensor parameter request
+      input:
+        data:
+          Cmd: 'GetSensorParaReq'
+          Device: 'R718WE'
+      output:
+        fPort: 7
+        bytes: [0x04, 0x8F, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]

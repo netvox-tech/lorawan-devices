@@ -1,0 +1,71 @@
+name: R726 Series - Multi-sensor Gateway
+description: R726 Series is a multi-sensor gateway that supports various environmental sensors including PM2.5, PM10, CO, NO, NO2, SO2, H2S, O3, NH3, temperature, humidity, wind speed, wind direction, atmospheric pressure, VOC, soil moisture, soil temperature, soil EC, pH, ORP, NTU, water level, and residual chlorine.
+
+hardwareVersions:
+  - version: '1'
+    numeric: 1
+
+firmwareVersions:
+  - version: '10'
+    numeric: 10
+    hardwareVersions:
+      - '1'
+
+    profiles:
+      EU863-870:
+        id: profile-eu868
+        codec: r726-codec
+      AS923:
+        id: profile-as923
+        codec: r726-codec
+      US902-928:
+        id: profile-us915
+        codec: r726-codec
+      AU915-928:
+        id: profile-au915
+        codec: r726-codec
+      KR920-923:
+        id: profile-kr920
+        codec: r726-codec
+      IN865-867:
+        id: profile-in865
+        codec: r726-codec
+      CN470-510:
+        id: profile-cn470
+        codec: r726-codec
+
+sensors:
+  - pm10
+  - pm2.5
+  - co
+  - no
+  - no2
+  - so2
+  - h2s
+  - o3
+  - temperature
+  - humidity
+  - wind speed
+  - wind direction
+  - pressure
+  - tvoc
+  - moisture
+  - conductivity
+  - ph
+  - turbidity
+  - level
+  - sound
+
+ipCode: IP65
+
+keyProvisioning:
+  - custom
+  - join server
+
+keySecurity: none
+
+productURL: http://www.netvox.com.tw/product.asp?pro=R726
+dataSheetURL: http://www.netvox.com.tw/um/R726/R726datasheet.pdf
+
+photos:
+  main: photos/r726.jpg

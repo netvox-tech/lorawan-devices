@@ -1,0 +1,401 @@
+uplinkDecoder:
+  fileName: payload/r726.js
+  examples:
+    - description: Startup version report
+      input:
+        fPort: 6
+        bytes: [0x01, 0x09, 0x00, 0x64, 0x01, 0x20, 0x20, 0x07, 0x29, 0x00, 0x00]
+      output:
+        data:
+          Device: 'R726 Series'
+          SWver: 10
+          HWver: 1
+          Datecode: '20200729'
+
+    - description: Status report - PM values
+      input:
+        fPort: 6
+        bytes: [0x01, 0x09, 0x01, 0x24, 0x00, 0x1E, 0x00, 0x32, 0x00, 0x64, 0x00]
+      output:
+        data:
+          Device: 'R726 Series'
+          Volt: 3.6
+          PM1_0: 30
+          PM2_5: 50
+          PM10: 100
+
+    - description: Status report - Gas sensors
+      input:
+        fPort: 6
+        bytes: [0x01, 0x09, 0x05, 0x24, 0x00, 0x14, 0x00, 0x64, 0x00, 0x32, 0x00]
+      output:
+        data:
+          Device: 'R726 Series'
+          Volt: 3.6
+          O3: 2.0
+          CO: 10.0
+          NO: 5.0
+
+    - description: Configure report response
+      input:
+        fPort: 7
+        bytes: [0x81, 0x09, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'ConfigReportRsp'
+          Device: 'R726 Series'
+          Status: 'Success'
+
+    - description: Read configure report response
+      input:
+        fPort: 7
+        bytes: [0x82, 0x09, 0x03, 0x84, 0x07, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'ReadConfigReportRsp'
+          Device: 'R726 Series'
+          MinTime: 900
+          MaxTime: 1800
+
+    - description: Set LDO setting response
+      input:
+        fPort: 7
+        bytes: [0x83, 0x09, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'SetLDOSettingRsp'
+          Device: 'R726 Series'
+          Status: 'Success'
+
+    - description: Get LDO setting response
+      input:
+        fPort: 7
+        bytes: [0x84, 0x09, 0x00, 0x64, 0x01, 0x2C, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'GetLDOSettingRsp'
+          Device: 'R726 Series'
+          LDOsAltiud: 100
+          LDOsPSU: 300
+
+    - description: ORP calibrate response
+      input:
+        fPort: 7
+        bytes: [0x85, 0x09, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'ORPCalibrateRsp'
+          Device: 'R726 Series'
+          Status: 'Success'
+
+    - description: PH calibrate response
+      input:
+        fPort: 7
+        bytes: [0x86, 0x09, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'PHCalibrateRsp'
+          Device: 'R726 Series'
+          Status: 'Success'
+
+    - description: NTU calibrate response
+      input:
+        fPort: 7
+        bytes: [0x87, 0x09, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'NTUCalibrateRsp'
+          Device: 'R726 Series'
+          Status: 'Success'
+
+    - description: Set wire length response
+      input:
+        fPort: 7
+        bytes: [0x88, 0x09, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'SetWireLengthRsp'
+          Device: 'R726 Series'
+          Status: 'Success'
+
+    - description: Get wire length response
+      input:
+        fPort: 7
+        bytes: [0x89, 0x09, 0x00, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'GetWireLengthRsp'
+          Device: 'R726 Series'
+          Length: 100
+
+    - description: Set soil type response
+      input:
+        fPort: 7
+        bytes: [0x8A, 0x09, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'SetSoilTypeRsp'
+          Device: 'R726 Series'
+          Status: 'Success'
+
+    - description: Get soil type response
+      input:
+        fPort: 7
+        bytes: [0x8B, 0x09, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'GetSoilTypeRsp'
+          Device: 'R726 Series'
+          SoilType: 1
+
+    - description: Soil calibrate response
+      input:
+        fPort: 7
+        bytes: [0x8C, 0x09, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'SoilCalibrateRsp'
+          Device: 'R726 Series'
+          Status: 'Success'
+
+downlinkDecoder:
+  fileName: payload/r726.js
+  examples:
+    - description: Configure report request
+      input:
+        fPort: 7
+        bytes: [0x01, 0x09, 0x03, 0x84, 0x07, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'ConfigReportReq'
+          Device: 'R726 Series'
+          MinTime: 900
+          MaxTime: 1800
+
+    - description: Read configure report request
+      input:
+        fPort: 7
+        bytes: [0x02, 0x09, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'ReadConfigReportReq'
+          Device: 'R726 Series'
+
+    - description: Set LDO setting request
+      input:
+        fPort: 7
+        bytes: [0x03, 0x09, 0x00, 0x64, 0x01, 0x2C, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'SetLDOSettingReq'
+          Device: 'R726 Series'
+          LDOsAltiud: 100
+          LDOsPSU: 300
+
+    - description: Get LDO setting request
+      input:
+        fPort: 7
+        bytes: [0x04, 0x09, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'GetLDOSettingReq'
+          Device: 'R726 Series'
+
+    - description: ORP calibrate request
+      input:
+        fPort: 7
+        bytes: [0x05, 0x09, 0x01, 0x2C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'ORPCalibrateReq'
+          Device: 'R726 Series'
+          StandORP: 300
+
+    - description: PH calibrate request
+      input:
+        fPort: 7
+        bytes: [0x06, 0x09, 0x00, 0x46, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'PHCalibrateReq'
+          Device: 'R726 Series'
+          StandPH: 70
+
+    - description: NTU calibrate request
+      input:
+        fPort: 7
+        bytes: [0x07, 0x09, 0x00, 0x32, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'NTUCalibrateReq'
+          Device: 'R726 Series'
+          StandNTU: 50
+
+    - description: Set wire length request
+      input:
+        fPort: 7
+        bytes: [0x08, 0x09, 0x00, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'SetWireLengthReq'
+          Device: 'R726 Series'
+          Length: 100
+
+    - description: Get wire length request
+      input:
+        fPort: 7
+        bytes: [0x09, 0x09, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'GetWireLengthReq'
+          Device: 'R726 Series'
+
+    - description: Set soil type request
+      input:
+        fPort: 7
+        bytes: [0x0A, 0x09, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'SetSoilTypeReq'
+          Device: 'R726 Series'
+          SoilType: 1
+
+    - description: Get soil type request
+      input:
+        fPort: 7
+        bytes: [0x0B, 0x09, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'GetSoilTypeReq'
+          Device: 'R726 Series'
+
+    - description: Soil calibrate request
+      input:
+        fPort: 7
+        bytes: [0x0C, 0x09, 0x05, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'SoilCalibrateReq'
+          Device: 'R726 Series'
+          VWCDelt: 5
+
+downlinkEncoder:
+  fileName: payload/r726.js
+  examples:
+    - description: Configure report request
+      input:
+        data:
+          Cmd: 'ConfigReportReq'
+          Device: 'R726 Series'
+          MinTime: 900
+          MaxTime: 1800
+      output:
+        fPort: 7
+        bytes: [0x01, 0x09, 0x03, 0x84, 0x07, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00]
+
+    - description: Read configure report request
+      input:
+        data:
+          Cmd: 'ReadConfigReportReq'
+          Device: 'R726 Series'
+      output:
+        fPort: 7
+        bytes: [0x02, 0x09, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+
+    - description: Set LDO setting request
+      input:
+        data:
+          Cmd: 'SetLDOSettingReq'
+          Device: 'R726 Series'
+          LDOsAltiud: 100
+          LDOsPSU: 300
+      output:
+        fPort: 7
+        bytes: [0x03, 0x09, 0x00, 0x64, 0x01, 0x2C, 0x00, 0x00, 0x00, 0x00, 0x00]
+
+    - description: Get LDO setting request
+      input:
+        data:
+          Cmd: 'GetLDOSettingReq'
+          Device: 'R726 Series'
+      output:
+        fPort: 7
+        bytes: [0x04, 0x09, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+
+    - description: ORP calibrate request
+      input:
+        data:
+          Cmd: 'ORPCalibrateReq'
+          Device: 'R726 Series'
+          StandORP: 300
+      output:
+        fPort: 7
+        bytes: [0x05, 0x09, 0x01, 0x2C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+
+    - description: PH calibrate request
+      input:
+        data:
+          Cmd: 'PHCalibrateReq'
+          Device: 'R726 Series'
+          StandPH: 70
+      output:
+        fPort: 7
+        bytes: [0x06, 0x09, 0x00, 0x46, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+
+    - description: NTU calibrate request
+      input:
+        data:
+          Cmd: 'NTUCalibrateReq'
+          Device: 'R726 Series'
+          StandNTU: 50
+      output:
+        fPort: 7
+        bytes: [0x07, 0x09, 0x00, 0x32, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+
+    - description: Set wire length request
+      input:
+        data:
+          Cmd: 'SetWireLengthReq'
+          Device: 'R726 Series'
+          Length: 100
+      output:
+        fPort: 7
+        bytes: [0x08, 0x09, 0x00, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+
+    - description: Get wire length request
+      input:
+        data:
+          Cmd: 'GetWireLengthReq'
+          Device: 'R726 Series'
+      output:
+        fPort: 7
+        bytes: [0x09, 0x09, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+
+    - description: Set soil type request
+      input:
+        data:
+          Cmd: 'SetSoilTypeReq'
+          Device: 'R726 Series'
+          SoilType: 1
+      output:
+        fPort: 7
+        bytes: [0x0A, 0x09, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+
+    - description: Get soil type request
+      input:
+        data:
+          Cmd: 'GetSoilTypeReq'
+          Device: 'R726 Series'
+      output:
+        fPort: 7
+        bytes: [0x0B, 0x09, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+
+    - description: Soil calibrate request
+      input:
+        data:
+          Cmd: 'SoilCalibrateReq'
+          Device: 'R726 Series'
+          VWCDelt: 5
+      output:
+        fPort: 7
+        bytes: [0x0C, 0x09, 0x05, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]

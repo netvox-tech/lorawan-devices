@@ -1,0 +1,13 @@
+﻿uplinkDecoder:
+  fileName: payload/r718pd.js
+  examples:
+    - description: Startup version report
+      input:
+        fPort: 6
+        bytes: [0x01, 0x96, 0x00, 0x64, 0x01, 0x20, 0x20, 0x07, 0x29, 0x00, 0x00]
+      output:
+        data:
+          Device: 'R718PD'
+          SWver: 10
+          HWver: 1
+          Datecode: '20200729'

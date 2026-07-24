@@ -1,0 +1,391 @@
+uplinkDecoder:
+  fileName: payload/r718sa.js
+  examples:
+    - description: Version report
+      input:
+        fPort: 6
+        bytes: [0x01, 0x5D, 0x00, 0x01, 0x02, 0x20, 0x21, 0x03, 0x22]
+      output:
+        data:
+          Device: 'R718SA'
+          Cmd: 'VersionReport'
+          SoftwareVersion: '0x01'
+          HardwareVersion: '0x02'
+          DateCode: '20210322'
+
+    - description: Measurement report
+      input:
+        fPort: 6
+        bytes: [0x01, 0x5D, 0x01, 0x05, 0x00, 0xC8, 0x01, 0x2C, 0x01, 0xF4, 0x01]
+      output:
+        data:
+          Device: 'R718SA'
+          Cmd: 'MeasurementReport'
+          Battery: 0.5
+          Temperature: 2.0
+          Humidity: 3.0
+          PM2_5: 500
+          ThresholdAlarm: 1
+
+    - description: Configure report response
+      input:
+        fPort: 7
+        bytes: [0x81, 0x5D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Device: 'R718SA'
+          Cmd: 'ConfigReportRsp'
+          Status: 'Success'
+
+    - description: Read configure report response
+      input:
+        fPort: 7
+        bytes: [0x82, 0x5D, 0x00, 0x03, 0x84, 0x07, 0x08, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Device: 'R718SA'
+          Cmd: 'ReadConfigReportRsp'
+          MinTime: 900
+          MaxTime: 1800
+    - description: Set LDO setting response
+      input:
+        fPort: 7
+        bytes: [0x83, 0x5D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Device: 'R718SA'
+          Cmd: 'SetLDOSettingRsp'
+          Status: 'Success'
+
+    - description: Get LDO setting response
+      input:
+        fPort: 7
+        bytes: [0x84, 0x5D, 0x00, 0x64, 0x00, 0xC8, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Device: 'R718SA'
+          Cmd: 'GetLDOSettingRsp'
+          LDOsAltiud: 100
+          LDOsPSU: 200
+
+    - description: ORP calibrate response
+      input:
+        fPort: 7
+        bytes: [0x85, 0x5D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Device: 'R718SA'
+          Cmd: 'ORPCalibrateRsp'
+          Status: 'Success'
+
+    - description: PH calibrate response
+      input:
+        fPort: 7
+        bytes: [0x86, 0x5D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Device: 'R718SA'
+          Cmd: 'PHCalibrateRsp'
+          Status: 'Success'
+
+    - description: NTU calibrate response
+      input:
+        fPort: 7
+        bytes: [0x87, 0x5D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Device: 'R718SA'
+          Cmd: 'NTUCalibrateRsp'
+          Status: 'Success'
+
+    - description: Set wire length response
+      input:
+        fPort: 7
+        bytes: [0x88, 0x5D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Device: 'R718SA'
+          Cmd: 'SetWireLengthRsp'
+          Status: 'Success'
+
+    - description: Get wire length response
+      input:
+        fPort: 7
+        bytes: [0x89, 0x5D, 0x00, 0x00, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Device: 'R718SA'
+          Cmd: 'GetWireLengthRsp'
+          Length: 10.0
+
+    - description: Set soil type response
+      input:
+        fPort: 7
+        bytes: [0x8A, 0x5D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Device: 'R718SA'
+          Cmd: 'SetSoilTypeRsp'
+          Status: 'Success'
+
+    - description: Get soil type response
+      input:
+        fPort: 7
+        bytes: [0x8B, 0x5D, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Device: 'R718SA'
+          Cmd: 'GetSoilTypeRsp'
+          SoilType: 1
+
+    - description: Soil calibrate response
+      input:
+        fPort: 7
+        bytes: [0x8C, 0x5D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Device: 'R718SA'
+          Cmd: 'SoilCalibrateRsp'
+          Status: 'Success'
+
+downlinkEncoder:
+  fileName: payload/r718sa.js
+  examples:
+    - description: Configure report request
+      input:
+        data:
+          Cmd: 'ConfigReportReq'
+          Device: 'R718SA'
+          MinTime: 900
+          MaxTime: 1800
+      output:
+        fPort: 7
+        bytes: [0x01, 0x5D, 0x03, 0x84, 0x07, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00]
+
+    - description: Read configure report request
+      input:
+        data:
+          Cmd: 'ReadConfigReportReq'
+          Device: 'R718SA'
+      output:
+        fPort: 7
+        bytes: [0x02, 0x5D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+
+    - description: Set LDO setting request
+      input:
+        data:
+          Cmd: 'SetLDOSettingReq'
+          Device: 'R718SA'
+          LDOsAltiud: 100
+          LDOsPSU: 200
+      output:
+        fPort: 7
+        bytes: [0x03, 0x5D, 0x00, 0x64, 0x00, 0xC8, 0x00, 0x00, 0x00, 0x00, 0x00]
+
+    - description: Get LDO setting request
+      input:
+        data:
+          Cmd: 'GetLDOSettingReq'
+          Device: 'R718SA'
+      output:
+        fPort: 7
+        bytes: [0x04, 0x5D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+
+    - description: ORP calibrate request
+      input:
+        data:
+          Cmd: 'ORPCalibrateReq'
+          Device: 'R718SA'
+          StandORP: 200
+      output:
+        fPort: 7
+        bytes: [0x05, 0x5D, 0x00, 0xC8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+
+    - description: PH calibrate request
+      input:
+        data:
+          Cmd: 'PHCalibrateReq'
+          Device: 'R718SA'
+          StandPH: 700
+      output:
+        fPort: 7
+        bytes: [0x06, 0x5D, 0x02, 0xBC, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+
+    - description: NTU calibrate request
+      input:
+        data:
+          Cmd: 'NTUCalibrateReq'
+          Device: 'R718SA'
+          StandNTU: 100
+      output:
+        fPort: 7
+        bytes: [0x07, 0x5D, 0x00, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+
+    - description: Set wire length request
+      input:
+        data:
+          Cmd: 'SetWireLengthReq'
+          Device: 'R718SA'
+          Length: 10
+      output:
+        fPort: 7
+        bytes: [0x08, 0x5D, 0x00, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+
+    - description: Get wire length request
+      input:
+        data:
+          Cmd: 'GetWireLengthReq'
+          Device: 'R718SA'
+      output:
+        fPort: 7
+        bytes: [0x09, 0x5D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+
+    - description: Set soil type request
+      input:
+        data:
+          Cmd: 'SetSoilTypeReq'
+          Device: 'R718SA'
+          SoilType: 1
+      output:
+        fPort: 7
+        bytes: [0x0A, 0x5D, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+
+    - description: Get soil type request
+      input:
+        data:
+          Cmd: 'GetSoilTypeReq'
+          Device: 'R718SA'
+      output:
+        fPort: 7
+        bytes: [0x0B, 0x5D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+
+    - description: Soil calibrate request
+      input:
+        data:
+          Cmd: 'SoilCalibrateReq'
+          Device: 'R718SA'
+          VWCDelt: 5
+      output:
+        fPort: 7
+        bytes: [0x0C, 0x5D, 0x05, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+
+downlinkDecoder:
+  fileName: payload/r718sa.js
+  examples:
+    - description: Configure report request
+      input:
+        fPort: 7
+        bytes: [0x01, 0x5D, 0x03, 0x84, 0x07, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Device: 'R718SA'
+          Cmd: 'ConfigReportReq'
+          MinTime: 900
+          MaxTime: 1800
+
+    - description: Read configure report request
+      input:
+        fPort: 7
+        bytes: [0x02, 0x5D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Device: 'R718SA'
+          Cmd: 'ReadConfigReportReq'
+
+    - description: Set LDO setting request
+      input:
+        fPort: 7
+        bytes: [0x03, 0x5D, 0x00, 0x64, 0x00, 0xC8, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Device: 'R718SA'
+          Cmd: 'SetLDOSettingReq'
+          LDOsAltiud: 100
+          LDOsPSU: 200
+
+    - description: Get LDO setting request
+      input:
+        fPort: 7
+        bytes: [0x04, 0x5D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Device: 'R718SA'
+          Cmd: 'GetLDOSettingReq'
+
+    - description: ORP calibrate request
+      input:
+        fPort: 7
+        bytes: [0x05, 0x5D, 0x00, 0xC8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Device: 'R718SA'
+          Cmd: 'ORPCalibrateReq'
+          StandORP: 200
+
+    - description: PH calibrate request
+      input:
+        fPort: 7
+        bytes: [0x06, 0x5D, 0x02, 0xBC, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Device: 'R718SA'
+          Cmd: 'PHCalibrateReq'
+          StandPH: 700
+
+    - description: NTU calibrate request
+      input:
+        fPort: 7
+        bytes: [0x07, 0x5D, 0x00, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Device: 'R718SA'
+          Cmd: 'NTUCalibrateReq'
+          StandNTU: 100
+
+    - description: Set wire length request
+      input:
+        fPort: 7
+        bytes: [0x08, 0x5D, 0x00, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Device: 'R718SA'
+          Cmd: 'SetWireLengthReq'
+          Length: 10
+
+    - description: Get wire length request
+      input:
+        fPort: 7
+        bytes: [0x09, 0x5D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Device: 'R718SA'
+          Cmd: 'GetWireLengthReq'
+
+    - description: Set soil type request
+      input:
+        fPort: 7
+        bytes: [0x0A, 0x5D, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Device: 'R718SA'
+          Cmd: 'SetSoilTypeReq'
+          SoilType: 1
+
+    - description: Get soil type request
+      input:
+        fPort: 7
+        bytes: [0x0B, 0x5D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Device: 'R718SA'
+          Cmd: 'GetSoilTypeReq'
+
+    - description: Soil calibrate request
+      input:
+        fPort: 7
+        bytes: [0x0C, 0x5D, 0x05, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Device: 'R718SA'
+          Cmd: 'SoilCalibrateReq'
+          VWCDelt: 5

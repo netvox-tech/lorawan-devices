@@ -1,0 +1,158 @@
+﻿uplinkDecoder:
+  fileName: payload/r718wd.js
+  examples:
+    - description: Startup version report
+      input:
+        fPort: 6
+        bytes: [0x01, 0x33, 0x00, 0x64, 0x01, 0x20, 0x20, 0x07, 0x29, 0x00, 0x00]
+      output:
+        data:
+          Device: 'R718WD'
+          SWver: 10
+          HWver: 1
+          Datecode: '20200729'
+
+    - description: Status report
+      input:
+        fPort: 6
+        bytes: [0x01, 0x33, 0x01, 0x32, 0x01, 0xE0, 0x50, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Device: 'R718WD'
+          Volt: 3.2
+          TankRawData: 480
+          TankLevl: 80
+
+    - description: Configure report response
+      input:
+        fPort: 7
+        bytes: [0x81, 0x33, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'ConfigReportRsp'
+          Device: 'R718WD'
+          Status: 'Success'
+
+    - description: Read configure report response
+      input:
+        fPort: 7
+        bytes: [0x82, 0x33, 0x03, 0x84, 0x07, 0x08, 0x01, 0x05, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'ReadConfigReportRsp'
+          Device: 'R718WD'
+          MinTime: 900
+          MaxTime: 1800
+          BatteryChange: 0.1
+          TankLevelChange: 5
+
+    - description: Set tank level range response
+      input:
+        fPort: 7
+        bytes: [0x83, 0x33, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'SetTankLevelRangeRsp'
+          Device: 'R718WD'
+          Status: 'Success'
+
+    - description: Get tank level range response
+      input:
+        fPort: 7
+        bytes: [0x84, 0x33, 0x0A, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'GetTankLevelRangeRsp'
+          Device: 'R718WD'
+          MinSensorVoltage: 10
+          MaxSensorVoltage: 100
+
+downlinkDecoder:
+  fileName: payload/r718wd.js
+  examples:
+    - description: Configure report request
+      input:
+        fPort: 7
+        bytes: [0x01, 0x33, 0x03, 0x84, 0x07, 0x08, 0x01, 0x05, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'ConfigReportReq'
+          Device: 'R718WD'
+          MinTime: 900
+          MaxTime: 1800
+          BatteryChange: 0.1
+          TankLevelChange: 5
+
+    - description: Read configure report request
+      input:
+        fPort: 7
+        bytes: [0x02, 0x33, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'ReadConfigReportReq'
+          Device: 'R718WD'
+
+    - description: Set tank level range request
+      input:
+        fPort: 7
+        bytes: [0x03, 0x33, 0x0A, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'SetTankLevelRangeReq'
+          Device: 'R718WD'
+          MinSensorVoltage: 10
+          MaxSensorVoltage: 100
+
+    - description: Get tank level range request
+      input:
+        fPort: 7
+        bytes: [0x04, 0x33, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      output:
+        data:
+          Cmd: 'GetTankLevelRangeReq'
+          Device: 'R718WD'
+
+downlinkEncoder:
+  fileName: payload/r718wd.js
+  examples:
+    - description: Configure report request
+      input:
+        data:
+          Cmd: 'ConfigReportReq'
+          Device: 'R718WD'
+          MinTime: 900
+          MaxTime: 1800
+          BatteryChange: 0.1
+          TankLevelChange: 5
+      output:
+        fPort: 7
+        bytes: [0x01, 0x33, 0x03, 0x84, 0x07, 0x08, 0x01, 0x05, 0x00, 0x00, 0x00]
+
+    - description: Read configure report request
+      input:
+        data:
+          Cmd: 'ReadConfigReportReq'
+          Device: 'R718WD'
+      output:
+        fPort: 7
+        bytes: [0x02, 0x33, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+
+    - description: Set tank level range request
+      input:
+        data:
+          Cmd: 'SetTankLevelRangeReq'
+          Device: 'R718WD'
+          MinSensorVoltage: 10
+          MaxSensorVoltage: 100
+      output:
+        fPort: 7
+        bytes: [0x03, 0x33, 0x0A, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+
+    - description: Get tank level range request
+      input:
+        data:
+          Cmd: 'GetTankLevelRangeReq'
+          Device: 'R718WD'
+      output:
+        fPort: 7
+        bytes: [0x04, 0x33, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
